@@ -21,9 +21,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          echo "test file" > test.txt
+          changedFiles=$(git diff --name-only HEAD^)
+          echo "changedFiles: $changedFiles"
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
-            -f "body=Hello"
+            -f "body=$changedFiles"
