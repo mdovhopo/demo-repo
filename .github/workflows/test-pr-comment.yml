@@ -24,9 +24,9 @@ jobs:
           mkdir -p test
           echo "test file" > test/test.txt
           git add test/test.txt
-          git commit -m "test"
           git config --global user.email "test@test.com"
           git config --global user.name "test"
+          git commit -m "test"
           changedFiles=$(git diff --name-only HEAD^)
           echo "changedFiles: $changedFiles"
           gh api \
