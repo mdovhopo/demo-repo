@@ -23,8 +23,8 @@ jobs:
         run: |
           mkdir -p test
           echo "test file" > test/test.txt
-          # git add test/test.txt
-          echo $(git log --name-status -1 test)
+          git add test/test.txt
+          git commit -m "test"
           changedFiles=$(git diff --name-only HEAD^)
           echo "changedFiles: $changedFiles"
           gh api \
