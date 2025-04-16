@@ -25,6 +25,8 @@ jobs:
           echo "test file" > test/test.txt
           git add test/test.txt
           git commit -m "test"
+          git config --global user.email "test@test.com"
+          git config --global user.name "test"
           changedFiles=$(git diff --name-only HEAD^)
           echo "changedFiles: $changedFiles"
           gh api \
