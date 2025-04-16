@@ -8,8 +8,9 @@ jobs:
   build-c1-c2-diagrams:
     runs-on: ubuntu-latest
     permissions:
-      contents: 'read'
+      contents: 'write'
       id-token: 'write'
+      pull-requests: 'write'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
