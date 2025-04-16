@@ -29,9 +29,10 @@ jobs:
           git commit -m "test"
           changedFiles=$(git diff --name-only HEAD^)
           echo "changedFiles: $changedFiles"
+          body="Generated diagrams:\n$changedFiles"
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             /repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
-            -f "body=$changedFiles"
+            -f "body=$body"
