@@ -22,6 +22,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           echo "test file" > test.txt
+          git add test.txt
           changedFiles=$(git diff --name-only HEAD^)
           echo "changedFiles: $changedFiles"
           gh api \
