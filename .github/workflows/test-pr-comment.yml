@@ -6,6 +6,7 @@ on:
 
 jobs:
   build-c1-c2-diagrams:
+    runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
