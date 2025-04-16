@@ -1,0 +1,20 @@
+name: Prebuild
+concurrency: backend-build
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  ci:
+    build-c1-c2-diagrams:
+      runs-on: tillhub-org-runner
+      permissions:
+        contents: 'read'
+        id-token: 'write'
+      steps:
+        - name: Comment PR
+          uses: thollander/actions-comment-pull-request@v3
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            file-path: test.png
