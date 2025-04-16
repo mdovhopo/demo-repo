@@ -1,0 +1,38 @@
+name: Prebuild
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build-c1-c2-diagrams:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+      pull-requests: 'write'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Comment PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p test
+          echo "test file" > test/test.txt
+          git add test/test.txt
+          git config --global user.email "test@test.com"
+          git config --global user.name "test"
+          git commit -m "test"
+          changedFiles=$(git diff --name-only HEAD^)
+          echo "changedFiles: $changedFiles"
+          body="<img width="400" alt="$changedFiles" src="https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/${{ github.head_ref }}/test.png" />"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/comments \
+            -f "body=$body"
