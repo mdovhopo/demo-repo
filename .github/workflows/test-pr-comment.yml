@@ -29,7 +29,7 @@ jobs:
           git commit -m "test"
           changedFiles=$(git diff --name-only HEAD^)
           echo "changedFiles: $changedFiles"
-          body="https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/${{ github.ref }}/$changedFiles"
+          body="<img width="400" alt="$changedFiles" src="https://raw.githubusercontent.com/${{ github.repository }}/refs/heads/${{ github.ref }}/$changedFiles" />"
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
