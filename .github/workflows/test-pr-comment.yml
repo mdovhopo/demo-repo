@@ -1,5 +1,4 @@
 name: Prebuild
-concurrency: backend-build
 
 on:
   pull_request:
@@ -7,7 +6,6 @@ on:
 
 jobs:
   build-c1-c2-diagrams:
-    runs-on: tillhub-org-runner
     permissions:
       contents: 'read'
       id-token: 'write'
